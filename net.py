@@ -2,21 +2,20 @@ import netlas, sys, json
 
 
 class Heker:
-    def __init__(self):
-        self.apikey = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-        self.connect = netlas.Netlas(api_key=self.apikey)
+    def __init__(self, apikey):
+        self.connect = netlas.Netlas(api_key=apikey)
         self.ekstrak = netlas.helpers
 
     def start_search(self, search):
         print("Default Page: 0")
         try:
-            # sampai = 1
+            dari = int(input("Dari Page: "))
             sampai = int(input("Sampai Page: "))
         except:
             print("Must Integer!")
             sys.exit()
 
-        for pages in range(sampai):
+        for pages in range(dari, sampai):
             query_res = self.connect.query(
                 query=search, datatype="response", page=pages
             )
@@ -31,5 +30,6 @@ class Heker:
             except:
                 print("Limit Page")
 
-
-Heker().start_search("laravel")
+api = input("Api Netlas: ")
+dork = input("Dork: ")
+Heker(api).start_search(dork)
